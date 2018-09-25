@@ -1,0 +1,289 @@
+import * as stix2viz from 'cti-stix-visualization/stix2viz/stix2viz/stix2viz';
+
+export class StixVisualizer {
+  // Init some stuff
+  // MATT: For optimization purposes, look into moving these to local variables
+  public selectedContainer = document.getElementById('selection');
+  // public uploader = document.getElementById('uploader');
+  public canvasContainer = document.getElementById('canvas-container');
+  public canvas = document.getElementById('canvas');
+  // styles = window.getComputedStyle(uploader);
+
+  attached() {
+    /* ******************************************************
+     * When the page is ready, setup the visualization and bind events
+     * ******************************************************/
+    // document.getElementById('files').addEventListener('change', this.handleFileSelect, false);
+    // document.getElementById('paste-parser').addEventListener('click', this.handleTextarea, false);
+    // document.getElementById('fetch-url').addEventListener('click', this.handleFetchJson, false);
+    document.getElementById('header').addEventListener('click', this.resetPage, false);
+    // uploader.addEventListener('dragover', handleDragOver, false);
+    // uploader.addEventListener('drop', handleFileDrop, false);
+    window.onresize = this.resizeCanvas;
+    document.getElementById('selected').addEventListener('click', this.selectedNodeClick, false);
+    // fetchJsonFromUrl();      
+  }
+  /* ******************************************************
+   * Resizes the canvas based on the size of the window
+   * ******************************************************/
+  resizeCanvas() {
+    var cWidth = document.getElementById('legend').offsetLeft - 52;
+    var cHeight = window.innerHeight - document.getElementsByTagName('h1')[0].offsetHeight - 27;
+    document.getElementById('canvas-wrapper').style.width = cWidth.toString();
+    this.canvas.style.width = cWidth.toString();
+    this.canvas.style.height = cHeight.toString();
+  }
+
+  /* ******************************************************
+   * Will be called right before the graph is built.
+   * ******************************************************/
+  vizCallback() {
+    this.hideMessages();
+    this.resizeCanvas();
+  }
+
+  /* ******************************************************
+   * Initializes the graph, then renders it.
+   * ******************************************************/
+  vizStixWrapper(content) {
+    const cfg = {
+      iconDir: "stix2viz/stix2viz/icons"
+    }
+    stix2viz.vizInit(this.canvas, cfg, this.populateLegend, this.populateSelected);
+    stix2viz.vizStix(content, this.vizCallback);
+  }
+
+  /* ----------------------------------------------------- *
+   * ******************************************************
+   * This group of functions is for handling file "upload."
+   * They take an event as input and parse the file on the
+   * front end.
+   * ******************************************************/
+
+   /*
+  handleFileSelect(evt) {
+    this.handleFiles(evt.target.files);
+  }
+
+  handleFileDrop(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    this.handleFiles(evt.dataTransfer.files);
+  }
+
+  handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+  }
+
+  handleFiles(files) {
+    // files is a FileList of File objects (in our case, just one)
+    for (var i = 0, f; f = files[i]; i++) {
+      document.getElementById('chosen-files').innerText += f.name + " ";
+
+      var r = new FileReader();
+      r.onload = function (e) { stix2viz.vizStixWrapper(e.target.result) };
+      r.readAsText(f);
+    }
+    this.linkifyHeader();
+  }
+*/
+
+  /* ---------------------------------------------------- */
+
+  /* ******************************************************
+   * Handles content pasted to the text area.
+   * ******************************************************/
+  // handleTextarea() {
+  //   content = document.getElementById('paste-area').value;
+  //   this.vizStixWrapper(content)
+  //   linkifyHeader();
+  // }
+
+  /* ******************************************************
+   * Fetches STIX 2.0 data from an external URL (supplied
+   * user) via AJAX. Server-side Access-Control-Allow-Origin
+   * must allow cross-domain requests for this to work.
+   * ******************************************************/
+  // handleFetchJson() {
+  //   var url = document.getElementById("url").value;
+  //   fetchJsonAjax(url, function (content) {
+  //     vizStixWrapper(content)
+  //   });
+  //   linkifyHeader();
+  // }
+
+  /* ******************************************************
+   * Adds icons and information to the legend.
+   *
+   * Takes an array of type names as input
+   * ******************************************************/
+  populateLegend(typeGroups) {
+    var ul = document.getElementById('legend-content');
+    typeGroups.forEach(function (typeName) {
+      var li = document.createElement('li');
+      var val = document.createElement('p');
+      var key = document.createElement('div');
+      key.style.backgroundImage = "url('stix2viz/stix2viz/icons/stix2_" + typeName.replace(/\-/g, '_') + "_icon_tiny_round_v1.png')";
+      val.innerText = typeName.charAt(0).toUpperCase() + typeName.substr(1).toLowerCase(); // Capitalize it
+      li.appendChild(key);
+      li.appendChild(val);
+      ul.appendChild(li);
+    });
+  }
+
+  /* ******************************************************
+   * Adds information to the selected node table.
+   *
+   * Takes datum as input
+   * ******************************************************/
+  populateSelected(d) {
+    // Remove old values from HTML
+    this.selectedContainer.innerHTML = '';
+
+    var counter = 0;
+
+    Object.keys(d).forEach(function (key) { // Make new HTML elements and display them
+      // Create new, empty HTML elements to be filled and injected
+      var div = document.createElement('div');
+      var type = document.createElement('div');
+      var val = document.createElement('div');
+
+      // Assign classes for proper styling
+      if ((counter % 2) != 0) {
+        div.classList.add("odd"); // every other row will have a grey background
+      }
+      type.classList.add("type");
+      val.classList.add("value");
+
+      // Add the text to the new inner html elements
+      var value = d[key];
+      type.innerText = key;
+      val.innerText = value;
+
+      // Add new divs to "Selected Node"
+      div.appendChild(type);
+      div.appendChild(val);
+      this.selectedContainer.appendChild(div);
+
+      // increment the class counter
+      counter += 1;
+    });
+  }
+
+  /* ******************************************************
+   * Hides the data entry container and displays the graph
+   * container
+   * ******************************************************/
+  hideMessages() {
+    // this.uploader.classList.toggle("hidden");
+    this.canvasContainer.classList.toggle("hidden");
+  }
+
+  /* ******************************************************
+   * Turns header into a "home" "link"
+   * ******************************************************/
+  linkifyHeader() {
+    var header = document.getElementById('header');
+    header.classList.add('linkish');
+  }
+
+  /* *****************************************************
+   * Returns the page to its original load state
+   * *****************************************************/
+  resetPage() {
+    var header = document.getElementById('header');
+    if (header.classList.contains('linkish')) {
+      this.hideMessages();
+      stix2viz.vizReset();
+      //document.getElementById('files').value = ""; // reset the files input
+      document.getElementById('chosen-files').innerHTML = ""; // reset the subheader text
+      document.getElementById('legend-content').innerHTML = ""; // reset the legend in the sidebar
+
+      header.classList.remove('linkish');
+    }
+  }
+
+  /* ******************************************************
+   * Generic AJAX 'GET' request.
+   *
+   * Takes a URL and a callback function as input.
+   * ******************************************************/
+  fetchJsonAjax(url, cfunc) {
+    var regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i;
+    if (!regex.test(url)) {
+      alert("ERROR: Double check url provided");
+    }
+
+    var xhttp;
+    // if (window.XMLHttpRequest) {
+    //   xhttp = new XMLHttpRequest();
+    // }
+
+    xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        cfunc(xhttp.responseText);
+      } else if (xhttp.status != 200 && xhttp.status != 0) {
+        alert("ERROR: " + xhttp.status + ": " + xhttp.statusText + " - Double check url provided");
+        return;
+      }
+
+      xhttp.onerror = function () {
+        alert("ERROR: Unable to fetch JSON. The domain entered has either rejected the request, \
+is not serving JSON, or is not running a webserver.\n\nA GitHub Gist can be created to host RAW JSON data to prevent this.");
+      };
+    }
+    xhttp.open("GET", url, true);
+    xhttp.send();
+  }
+
+  /* ******************************************************
+   * AJAX 'GET' request from `?url=` parameter
+   *
+   * Will check the URL during `window.onload` to determine
+   * if `?url=` parameter is provided
+   * ******************************************************/
+  fetchJsonFromUrl() {
+    var url = window.location.href;
+
+    // If `?` is not provided, load page normally
+    if (/\?/.test(url)) {
+      // Regex to see if `url` parameter has a valid url value
+      var regex = /\?url=https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i;
+      var res = regex.exec(url);
+      if (res != null) {
+        // Get the value from the `url` parameter
+        const req_url = res[0].substring(5);
+
+        // Fetch JSON from the url
+        this.fetchJsonAjax(req_url, function (content) {
+          this.vizStixWrapper(content)
+        });
+        this.linkifyHeader();
+
+      } else {
+        alert("ERROR: Invalid url - Request must start with '?url=http[s]://' and be a valid domain");
+      }
+    }
+  }
+
+  selectedNodeClick() {
+    let selected = document.getElementById('selected');
+    if (selected.className.indexOf('clicked') === -1) {
+      selected.className += " clicked";
+      selected.style.position = 'absolute';
+      selected.style.left = '25px';
+      selected.style.width = (window.innerWidth - 110).toString();
+      selected.style.top = (document.getElementById('legend').offsetHeight + 25).toString();
+      selected.scrollIntoView(true);
+    } else {
+      selected.className = "sidebar"
+      selected.removeAttribute("style")
+    }
+  }
+
+}
