@@ -123,8 +123,9 @@ module.exports = ({production, server, extractCss, coverage, analyze, karma} = {
       filename: production ? '[contenthash].css' : '[id].css',
       allChunks: true
     })),
-    ...when(production || server, new CopyWebpackPlugin([
-      { from: 'static', to: outDir }])),
+    new CopyWebpackPlugin([
+      { from: 'static', to: 'static' }]
+    ),
     ...when(analyze, new BundleAnalyzerPlugin())
   ]
 });
