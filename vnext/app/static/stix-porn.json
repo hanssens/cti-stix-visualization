@@ -1,0 +1,284 @@
+{
+  "type": "bundle",
+  "spec_version": "2.0",
+  "id": "bundle--999aff42-349e-4d29-a8a0-8b00618fcfb3",
+  "objects": [
+    {
+      "sighting_of_ref": "indicator--f1d67a0c-f2a8-4f3e-8bc6-92565458d08a",
+      "created": "2018-09-17T05:38:15.747Z",
+      "where_sighted_refs": [
+        "identity--60694bc9-4ace-479d-ae3a-59fcf636ddb9"
+      ],
+      "first_seen": "2018-09-17T05:38:15.7478Z",
+      "observed_data_refs": [
+        "observed-data--476f03c6-d1e6-3650-8e1e-42894cae1189"
+      ],
+      "type": "sighting",
+      "modified": "2018-09-17T05:38:15.747Z",
+      "last_seen": "2018-09-17T05:38:15.7478Z",
+      "count": 1,
+      "created_by_ref": "identity--235a171b-e23a-4e6e-904e-5c45a948814c",
+      "id": "sighting--cd07cfba-9a09-4e5a-8384-063f1568a533"
+    },
+    {
+      "created": "2018-09-17T05:38:14.149Z",
+      "id": "observed-data--476f03c6-d1e6-3650-8e1e-42894cae1189",
+      "x_sic_entity_by_ref": "identity--60694bc9-4ace-479d-ae3a-59fcf636ddb9",
+      "number_observed": 1,
+      "first_observed": "2018-09-17T05:37:08Z",
+      "created_by_ref": "identity--235a171b-e23a-4e6e-904e-5c45a948814c",
+      "x_sic_custom_properties": {
+        "logs_download_enabled": true,
+        "zone_name": "Med-Priority Internet",
+        "soc_analyst_required": false,
+        "zone_type": "UNSPECIFIED_ZONE",
+        "vessel_imo": "0",
+        "service_subscribed": true,
+        "pool_id": "9",
+        "install_id": "6587",
+        "zone_priority_level": "HIGH_TRAFFIC",
+        "customer_id": "828",
+        "zone_id": "282",
+        "unkown_service_option": false,
+        "site_id": "5855"
+      },
+      "x_sic_tags": [
+        {
+          "value": "cdnth.zbporn.com",
+          "tag_id": "98290b772cb86eed2087e0fc0ed4fbccb91423def952392f08ca71dba1bb809d",
+          "object_path": "domain-name:value"
+        },
+        {
+          "value": "cdnth.zbporn.com",
+          "tag_id": "363ed6560fce3bb03175a9c1450235693c3a41f30498440a15ff42c3393e07b5",
+          "object_path": "domain-name:value"
+        },
+        {
+          "value": "cdnth.zbporn.com",
+          "tag_id": "1119a70843301816e2e296f5fd380aaa4f76933af2bf5e5a977e1dba551419fd",
+          "object_path": "domain-name:value"
+        },
+        {
+          "value": "cdnth.zbporn.com",
+          "tag_id": "02a4ed3aa71ef615ee15d33f5bf039bb680112fda069ed41b0327204bcbc1c18",
+          "object_path": "domain-name:value"
+        },
+        {
+          "value": "cdnth.zbporn.com",
+          "tag_id": "615d28f0ae78a612d2c7763776f21e86fad9ebc907a4b439ad21abe8ac4e9b48",
+          "object_path": "domain-name:value"
+        }
+      ],
+      "type": "observed-data",
+      "x_sic_timestamps": {
+        "nifi_kafka_end_timestamp": 1537162694107,
+        "nifi_sicmessageprocessor_end_timestamp": 1537162694215,
+        "nifi_controlrate_end_timestamp": 1537162694147
+      },
+      "objects": {
+        "0": {
+          "value": "8.8.8.8",
+          "type": "ipv4-addr"
+        },
+        "1": {
+          "value": "10.140.15.22",
+          "type": "ipv4-addr"
+        },
+        "2": {
+          "value": "cdnth.zbporn.com",
+          "type": "domain-name"
+        },
+        "3": {
+          "dst_packets": 1,
+          "end": "2018-09-17T05:37:08Z",
+          "src_byte_count": 0,
+          "src_port": 0,
+          "x_retcode": "0",
+          "protocols": [
+            "dns"
+          ],
+          "type": "x-dns-traffic",
+          "src_ref": "1",
+          "dst_ref": "0",
+          "x_querytype": "A",
+          "_valid_refs": {
+            "0": "ipv4-addr",
+            "1": "ipv4-addr",
+            "2": "domain-name",
+            "3": "x-dns-traffic"
+          },
+          "dst_byte_count": 62,
+          "x_latency_ms": 0,
+          "start": "2018-09-17T05:37:08Z",
+          "dst_port": 0,
+          "x_dnsquery_ref": "2",
+          "src_packets": 0
+        }
+      },
+      "modified": "2018-09-17T05:38:14.149Z",
+      "last_observed": "2018-09-17T05:37:08Z"
+    },
+    {
+      "created": "2018-09-17T05:38:15.751Z",
+      "modified": "2018-09-17T05:38:15.751Z",
+      "name": "Marlink 828",
+      "id": "identity--235a171b-e23a-4e6e-904e-5c45a948814c",
+      "identity_class": "community",
+      "type": "identity",
+      "description": "Marlink customer 828"
+    },
+    {
+      "created": "2018-09-17T05:38:15.751Z",
+      "type": "identity",
+      "modified": "2018-09-17T05:38:15.751Z",
+      "name": "Vessel 5855",
+      "x_sic_site_id": "5855",
+      "id": "identity--60694bc9-4ace-479d-ae3a-59fcf636ddb9",
+      "identity_class": "entity",
+      "created_by_ref": "identity--235a171b-e23a-4e6e-904e-5c45a948814c",
+      "description": "Customer 828 - Vessel 5855",
+      "x_sic_alert qualification mode": ""
+    },
+    {
+      "labels": [
+        "malicious-activity"
+      ],
+      "x_sic_entities_by_refs": [
+        "identity--60694bc9-4ace-479d-ae3a-59fcf636ddb9"
+      ],
+      "pattern": "[domain-name:value MATCHES 'porn' OR domain-name:value MATCHES 'cumshot' OR domain-name:value MATCHES 'gangbang' OR domain-name:value MATCHES 'orgy' OR domain-name:value MATCHES 'swallow' OR domain-name:value MATCHES 'voyeur' OR domain-name:value MATCHES 'amateur'] ",
+      "valid_from": "2018-09-17T05:38:15.7437Z",
+      "type": "indicator",
+      "created": "2018-09-17T05:38:15.743Z",
+      "created_by_ref": "identity--235a171b-e23a-4e6e-904e-5c45a948814c",
+      "modified": "2018-09-17T05:38:15.743Z",
+      "name": "Abusive bandwidth usage porn",
+      "id": "indicator--f1d67a0c-f2a8-4f3e-8bc6-92565458d08a",
+      "x_sic_alert": {
+        "generation_mode": "automatic",
+        "type": {
+          "category": "abusive-usage",
+          "value": "bandwidth-download",
+          "description": "SIC-Addition"
+        },
+        "severity": 12
+      },
+      "description": "Traffic associated with porn content"
+    },
+    {
+      "sighting_of_ref": "indicator--f1d67a0c-f2a8-4f3e-8bc6-92565458d08a",
+      "created": "2018-09-17T05:41:45.344Z",
+      "where_sighted_refs": [
+        "identity--60694bc9-4ace-479d-ae3a-59fcf636ddb9"
+      ],
+      "first_seen": "2018-09-17T05:41:45.3446Z",
+      "modified": "2018-09-17T05:41:45.344Z",
+      "observed_data_refs": [
+        "observed-data--28b74d41-5353-361b-90cb-2a99d2cdbd3c"
+      ],
+      "created_by_ref": "identity--235a171b-e23a-4e6e-904e-5c45a948814c",
+      "last_seen": "2018-09-17T05:41:45.3446Z",
+      "count": 1,
+      "type": "sighting",
+      "id": "sighting--fc4316da-7309-491d-a0f7-13f58375b89f"
+    },
+    {
+      "created": "2018-09-17T05:41:41.955Z",
+      "id": "observed-data--28b74d41-5353-361b-90cb-2a99d2cdbd3c",
+      "x_sic_entity_by_ref": "identity--60694bc9-4ace-479d-ae3a-59fcf636ddb9",
+      "number_observed": 1,
+      "first_observed": "2018-09-17T05:40:41Z",
+      "created_by_ref": "identity--235a171b-e23a-4e6e-904e-5c45a948814c",
+      "x_sic_custom_properties": {
+        "logs_download_enabled": true,
+        "zone_name": "Med-Priority Internet",
+        "soc_analyst_required": false,
+        "zone_type": "UNSPECIFIED_ZONE",
+        "vessel_imo": "0",
+        "service_subscribed": true,
+        "pool_id": "9",
+        "install_id": "6587",
+        "zone_priority_level": "HIGH_TRAFFIC",
+        "customer_id": "828",
+        "zone_id": "282",
+        "unkown_service_option": false,
+        "site_id": "5855"
+      },
+      "x_sic_tags": [
+        {
+          "value": "img.3pornstarmovies.com",
+          "tag_id": "98290b772cb86eed2087e0fc0ed4fbccb91423def952392f08ca71dba1bb809d",
+          "object_path": "domain-name:value"
+        },
+        {
+          "value": "img.3pornstarmovies.com",
+          "tag_id": "363ed6560fce3bb03175a9c1450235693c3a41f30498440a15ff42c3393e07b5",
+          "object_path": "domain-name:value"
+        },
+        {
+          "value": "img.3pornstarmovies.com",
+          "tag_id": "1119a70843301816e2e296f5fd380aaa4f76933af2bf5e5a977e1dba551419fd",
+          "object_path": "domain-name:value"
+        },
+        {
+          "value": "img.3pornstarmovies.com",
+          "tag_id": "02a4ed3aa71ef615ee15d33f5bf039bb680112fda069ed41b0327204bcbc1c18",
+          "object_path": "domain-name:value"
+        },
+        {
+          "value": "img.3pornstarmovies.com",
+          "tag_id": "615d28f0ae78a612d2c7763776f21e86fad9ebc907a4b439ad21abe8ac4e9b48",
+          "object_path": "domain-name:value"
+        }
+      ],
+      "type": "observed-data",
+      "x_sic_timestamps": {
+        "nifi_kafka_end_timestamp": 1537162901925,
+        "nifi_sicmessageprocessor_end_timestamp": 1537162902082,
+        "nifi_controlrate_end_timestamp": 1537162901949
+      },
+      "objects": {
+        "0": {
+          "value": "8.8.8.8",
+          "type": "ipv4-addr"
+        },
+        "1": {
+          "value": "10.140.15.22",
+          "type": "ipv4-addr"
+        },
+        "2": {
+          "value": "img.3pornstarmovies.com",
+          "type": "domain-name"
+        },
+        "3": {
+          "dst_packets": 1,
+          "end": "2018-09-17T05:40:41Z",
+          "src_byte_count": 0,
+          "src_port": 0,
+          "x_retcode": "0",
+          "protocols": [
+            "dns"
+          ],
+          "type": "x-dns-traffic",
+          "src_ref": "1",
+          "dst_ref": "0",
+          "x_querytype": "A",
+          "_valid_refs": {
+            "0": "ipv4-addr",
+            "1": "ipv4-addr",
+            "2": "domain-name",
+            "3": "x-dns-traffic"
+          },
+          "dst_byte_count": 69,
+          "x_latency_ms": 0,
+          "start": "2018-09-17T05:40:41Z",
+          "dst_port": 0,
+          "x_dnsquery_ref": "2",
+          "src_packets": 0
+        }
+      },
+      "modified": "2018-09-17T05:41:41.955Z",
+      "last_observed": "2018-09-17T05:40:41Z"
+    }
+  ]
+}
