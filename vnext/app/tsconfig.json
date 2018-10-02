@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "target": "es5",
-    "module": "esnext",
+    "module": "commonjs",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -13,7 +13,9 @@
     "skipLibCheck": true,
     "lib": [
       "es2017", "dom"
-    ]
+    ],
+    "resolveJsonModule": true,
+    "downlevelIteration": true
   },
   "include": [
     "./src/**/*.ts",
