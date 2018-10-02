@@ -1,9 +1,31 @@
 <template>
-  <require from="./app.scss"></require>
-  <require from="./components/stix-visualizer/stix-visualizer"></require>
-  <h1>Stix Visualizer</h1>
+    <require from="./app.scss"></require>
+    <require from="./components/stix-visualizer/stix-visualizer"></require>
+    <require from="./components/stix-viz/stix-viz"></require>
+    <require from="./converters/object-keys-value-converter"></require>
+    <require from="./converters/json-value-converter"></require>
 
-  <section class="app">
-    <stix-visualizer></stix-visualizer>
-  </section>
+    <section class="app">
+        <h1>Stix Visualizer</h1>
+
+        <!-- <stix-visualizer></stix-visualizer> -->
+        <stix-viz selected.from-view="selected"></stix-viz>
+
+        <div if.bind="selected">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Key</td>
+                        <td>Value</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr repeat.for="key of selected | objectKeys:'asc'">
+                        <td>${key}</td>
+                        <td>${selected[key] | json}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 </template>
